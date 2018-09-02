@@ -15,7 +15,7 @@ function is_file_error_valid($file_error) {
     return $file_error === 0;
 }
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['upload'])) {
     $file_name = $_FILES['file']['name'];
     $file_type = $_FILES['file']['type'];
     $file_tmp_name = $_FILES['file']['tmp_name'];
@@ -30,10 +30,8 @@ if(isset($_POST['submit'])) {
         exit();
     }
 
-    $file_name_new = uniqid('', true) . "." . $file_real_extension;
-    $file_destination = $files_repository . $file_name_new;
+    $file_destination = $files_repository . $file_name;
     move_uploaded_file($file_tmp_name, $file_destination);
-
 
 }
 ?>
