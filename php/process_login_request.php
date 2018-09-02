@@ -13,12 +13,13 @@ $result = $stmt->fetchAll();
 
 if(count($result) > 1) {
     echo "Inconsistency in database!";
-    exit(0);
+    exit();
 } else if($result == NULL) {
     echo "Wrong credentials!";
-    exit(0);
+    exit();
 } else {
-    echo "Hello, " . $result[0]['username'] . '  :)';
+    header("Location: /panel.php?name=" . $result[0]['username']);
+    exit();
 }
 
 ?>
