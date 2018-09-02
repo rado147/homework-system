@@ -11,13 +11,30 @@
         <br>
         <h2>
             <?php
-            $homeworks_repository = "homeworks_repository";
-            $homeworks = array_diff(scandir($homeworks_repository), array('.', '..'));
 
-            foreach ($homeworks as $value) {
-                echo $value;
-                echo "<br>";
-            }
+                $conn = new PDO("mysql:host=localhost; dbname=homework_system", "root", "");
+
+                $homeworks_repository = "homeworks_repository";
+                $homeworks = array_diff(scandir($homeworks_repository), array('.', '..'));
+
+                foreach ($homeworks as $value) {
+                    $check_stmt = $conn->prepare('SELECT * FROM homework_grades WHERE id=?');
+                    $check_stmt->execute([$value]);
+                    $check_result = $check_stmt->fetchAll();
+
+                    if(count($check_result) != 1 && count($check_result) != NULL) {
+                        echo "Inconsistency!";
+                        exit();
+                    }
+
+                    if($check_result == null) {
+                        echo $value . "<br>";
+                    } else {
+                        echo $value . "   Grade: " . $check_result[0]['grade'];
+                        echo "<br>";
+                    }
+                    
+                }
             ?>
         </h2>
         <div>
@@ -38,5 +55,16 @@
                 </button>
             </div>
         </form>
+        <br>
+        <div>
+            <form action="grade_homework.php" method="POST">
+                <div>
+                    <input type="text" name="hwork" id=hwork>
+                    <input type="number" min=2 max=6 name="grade" id=grade>
+                    <button type="submit" name="grade_homework"> Grade
+                    </button>
+                </div>
+            </form>
+        </div>
     </body>
 </html>
