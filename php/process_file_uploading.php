@@ -35,7 +35,6 @@ if(isset($_POST['upload']) || isset($_POST['upload_homework'])) {
         $file_destination = $files_repository . $file_name;
         move_uploaded_file($file_tmp_name, $file_destination);
     } else {
-        
         $homework_destination = $homeworks_repository . $file_name;
         move_uploaded_file($file_tmp_name, $homework_destination);
     }
