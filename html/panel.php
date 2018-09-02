@@ -10,8 +10,12 @@
                 echo "Hello, " . $_GET['name'] . "  :)"; 
             ?>
         </h1>
-        <div>
-            <button type="submit" id=upload>Upload test/exam</button>
-        </div>
+        <form action="process_file_uploading.php" method="POST" enctype="multipart/form-data">
+            <div>
+                <input type="file" name="file" id=file>
+                <button type="submit" name="submit"> Upload
+                </button>
+            </div>
+        </form>
     </body>
 </html>
