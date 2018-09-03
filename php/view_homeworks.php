@@ -3,6 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="/view_homeworks.css">
     </head>
     <body>
         <h1>
@@ -17,6 +18,7 @@
                 $homeworks_repository = "homeworks_repository";
                 $homeworks = array_diff(scandir($homeworks_repository), array('.', '..'));
 
+                $i = 1;
                 foreach ($homeworks as $value) {
                     $check_stmt = $conn->prepare('SELECT * FROM homework_grades WHERE id=?');
                     $check_stmt->execute([$value]);
@@ -28,17 +30,19 @@
                     }
 
                     if($check_result == null) {
-                        echo $value . "<br>";
+                        echo $i . ".    " . $value . "<br>";
                     } else {
-                        echo $value . "   Grade: " . $check_result[0]['grade'];
-                        echo "<br>";
+                        echo $i . ".    " . $value . "  -  Grade: " . $check_result[0]['grade'] . "<br>";
                     }
-                    
+                    $i = $i + 1;
                 }
             ?>
         </h2>
         <div>
             <br>
+            <h3>
+                Download submited homework
+            </h3>
             <form action="download_file.php" method="GET">
                 <div>
                     <input type="text" name="homework_name" id=homework_name>
@@ -48,6 +52,9 @@
             </form>
         </div>
         <br>
+        <h3>
+            Submit homework
+        </h3>
         <form action="process_file_uploading.php" method="POST" enctype="multipart/form-data">
             <div>
                 <input type="file" name="file" id=file>
@@ -56,6 +63,9 @@
             </div>
         </form>
         <br>
+        <h3>
+            Grade homework
+        </h3>
         <div>
             <form action="grade_homework.php" method="POST">
                 <div>
