@@ -11,7 +11,7 @@
                 echo "Hello, " . $_GET['name'] . "  :)"; 
             ?>
         </h1>
-        <form action="process_file_uploading.php" method="POST" enctype="multipart/form-data">
+        <form action="process_file_uploading.php?" method="POST" enctype="multipart/form-data">
             <div class="upload_div">
                 <input type="file" name="file" id=file>
                 <button type="submit" name="upload"> Upload
