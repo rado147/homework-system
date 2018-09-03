@@ -1,0 +1,11 @@
+.upload_div {
+    color:white;
+    background-color: rgb(11, 123,123);
+}
+
+.view_button {
+    height: 50px;
+    width: 150px;
+    color: rgb(11, 123,123);
+    border-radius: 10px;
+}
